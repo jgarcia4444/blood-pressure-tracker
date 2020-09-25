@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(entity: Record.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Record.dateRecorded, ascending: false)])  var records: FetchedResults<Record>
     var body: some View {
         ZStack {
             Color.red
@@ -17,7 +19,11 @@ struct ContentView: View {
                     Spacer()
                     VStack {
                         HStack {
-                            LastRecordedPressure()
+                            if (records.count > 0) {
+                                LastRecordedPressure()
+                            } else {
+                                Text("No Blood Pressure Recorded Yet.")
+                            }
                         }
                     }
                     Spacer()
@@ -36,6 +42,7 @@ struct ContentView: View {
             .background(Color.gray)
         }
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

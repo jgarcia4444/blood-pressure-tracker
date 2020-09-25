@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct LastRecordedPressure: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     var body: some View {
         VStack {
             HStack {
