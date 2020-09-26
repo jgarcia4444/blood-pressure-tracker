@@ -16,7 +16,6 @@ struct ContentView: View {
             ZStack {
                 Color.red
                 VStack {
-                    Spacer()
                     VStack {
                         HStack {
                             if (records.count > 0) {
@@ -27,7 +26,6 @@ struct ContentView: View {
                             }
                         }
                     }
-                    Spacer()
                     VStack {
                         HStack {
                             NavigationLink(destination: AddRecordView()) {
@@ -40,9 +38,14 @@ struct ContentView: View {
                                 .foregroundColor(.red)
                                 .shadow(color: .black, radius:  10, x: 0, y: 0)
                             }
+                            .padding([.top, .bottom])
+                        }
+                        HStack {
+                            Text("All Records")
+                            Image(systemName: "doc.on.doc")
                         }
                     }
-                    Spacer()
+                    
                 }
                 .navigationBarTitle("BP Tracker", displayMode: .large)
             }

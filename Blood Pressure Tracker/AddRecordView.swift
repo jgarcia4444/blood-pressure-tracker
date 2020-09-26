@@ -28,7 +28,7 @@ struct AddRecordView: View {
                 }
                 .padding()
                 HStack {
-                    Text("\(systolic) / \(diastolic)")
+                    Text(systolic.count > 0 || diastolic.count > 0 ? "\(systolic) / \(diastolic)" : "")
                         .font(.largeTitle)
                 }
                 .padding()
