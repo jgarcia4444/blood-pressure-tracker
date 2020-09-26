@@ -13,7 +13,6 @@ import SwiftUI
 struct LastRecordedPressure: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: Record.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Record.dateRecorded, ascending: false)]) var records: FetchedResults<Record>
-    @State private var dateFormatter : DateFormatter?
     var body: some View {
         VStack {
             HStack {
@@ -34,8 +33,8 @@ struct LastRecordedPressure: View {
                 Spacer()
                 VStack{
                     Text("Date")
-                    Text("")
-                        .font(.largeTitle)
+                    Text("\(self.formatDateToString())")
+                        .font(.headline)
                 }
             }
         .padding()
@@ -43,16 +42,17 @@ struct LastRecordedPressure: View {
         }
     .cornerRadius(20)
         .shadow(color: Color.gray, radius: 20, x: 0, y: 0)
-        .onAppear {
-            self.setupDateFormatter()
-        }
         
     }
-    func setupDateFormatter() {
+    func formatDateToString() -> String {
+        var returnString = "9/25/2020"
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .none
-        self.dateFormatter = dateFormatter
+        if let dateRecorded = records[0].dateRecorded {
+            returnString = dateFormatter.string(from: dateRecorded)
+        }
+        return returnString
     }
 }
 
