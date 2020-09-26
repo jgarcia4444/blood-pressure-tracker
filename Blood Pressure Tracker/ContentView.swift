@@ -12,9 +12,9 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: Record.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Record.dateRecorded, ascending: false)])  var records: FetchedResults<Record>
     var body: some View {
-        ZStack {
-            Color.red
-            NavigationView {
+        NavigationView {
+            ZStack {
+                Color.red
                 VStack {
                     Spacer()
                     VStack {
@@ -23,6 +23,7 @@ struct ContentView: View {
                                 LastRecordedPressure()
                             } else {
                                 Text("No Blood Pressure Recorded Yet.")
+                                    .font(.largeTitle)
                             }
                         }
                     }
@@ -30,16 +31,22 @@ struct ContentView: View {
                     VStack {
                         HStack {
                             NavigationLink(destination: AddRecordView()) {
-                              Text("Hello World")
+                              Image(systemName:"plus")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .padding()
+                                .background(Color.gray)
+                                .clipShape(Circle())
+                                .foregroundColor(.red)
+                                .shadow(color: .black, radius:  10, x: 0, y: 0)
                             }
                         }
                     }
                     Spacer()
                 }
-                .navigationBarTitle("Blood Pressure Tracker", displayMode: .inline)
-                .navigationBarItems(trailing: Text("+"))
+                .navigationBarTitle("BP Tracker", displayMode: .large)
             }
-            .background(Color.gray)
+            .edgesIgnoringSafeArea(.all)
         }
     }
     
