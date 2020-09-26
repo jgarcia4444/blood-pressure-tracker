@@ -13,6 +13,7 @@ struct AddRecordView: View {
     @State private var systolic = ""
     @State private var diastolic = ""
     @State private var recordSaved = false
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         ZStack {
             Color.red
@@ -43,11 +44,14 @@ struct AddRecordView: View {
                     }
                 }
             }
+        
         }
         .navigationBarTitle("Blood Pressure", displayMode: .large)
         .edgesIgnoringSafeArea(.all)
-        .alert(isPresented: $recordSaved) { () -> Alert in
-            Alert(title: Text("Record Saved"), message: Text("Your blood pressure input has been saved."), dismissButton: .default(Text("Okay")))
+        .alert(isPresented: $recordSaved) {
+            Alert(title: Text("Record Saved"), message: Text("Your blood pressure input has been saved."), dismissButton: .default(Text("Okay"), action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }))
         }
     }
     func saveBP() {

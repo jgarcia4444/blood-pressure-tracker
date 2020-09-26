@@ -19,6 +19,7 @@ struct LastRecordedPressure: View {
                 Spacer()
                 Text("Last record")
                     .font(.largeTitle)
+                    .foregroundColor(.red)
                 Spacer()
             }
             .padding([.top, .bottom], 10)
@@ -41,7 +42,7 @@ struct LastRecordedPressure: View {
             .background(Color.gray)
         }
     .cornerRadius(20)
-        .shadow(color: Color.gray, radius: 20, x: 0, y: 0)
+        .shadow(color: .black, radius: 10, x: 0, y: 0)
         
     }
     func formatDateToString() -> String {
