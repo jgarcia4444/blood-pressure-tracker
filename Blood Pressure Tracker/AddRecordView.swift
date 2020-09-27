@@ -41,12 +41,15 @@ struct AddRecordView: View {
                             .background(Color.gray)
                             .clipShape(Capsule())
                             .foregroundColor(.red)
+                            .shadow(color: .black, radius:  10, x: 0, y: 0)
                     }
+                
                 }
             }
         
         }
         .navigationBarTitle("Blood Pressure", displayMode: .large)
+        
         .edgesIgnoringSafeArea(.all)
         .alert(isPresented: $recordSaved) {
             Alert(title: Text("Record Saved"), message: Text("Your blood pressure input has been saved."), dismissButton: .default(Text("Okay"), action: {
@@ -69,6 +72,13 @@ struct AddRecordView: View {
         newRecord.diastolic = diastolicInput
         newRecord.dateRecorded = Date()
         
+        
+        
+        if let dateRecorded = newRecord.dateRecorded {
+            let isMorning = self.checkTime(dateRecorded: dateRecorded)
+            newRecord.morning = isMorning
+        }
+        
         do {
             try context.save()
         } catch {
@@ -76,6 +86,20 @@ struct AddRecordView: View {
         }
         recordSaved = true
     }
+    
+    func checkTime(dateRecorded: Date) -> Bool {
+        var morningCheck = false
+        let components = Calendar.current.dateComponents([.hour], from: dateRecorded)
+        if let currentHour = components.hour {
+            if currentHour < 12 {
+                morningCheck = true
+            } else {
+                morningCheck = false
+            }
+        }
+        return morningCheck
+    }
+    
 }
 
 struct AddRecordView_Previews: PreviewProvider {

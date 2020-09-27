@@ -21,8 +21,13 @@ struct ContentView: View {
                             if (records.count > 0) {
                                 LastRecordedPressure()
                             } else {
-                                Text("No Blood Pressure Recorded Yet.")
-                                    .font(.largeTitle)
+                                
+                                HStack {
+                                    Text("No Blood Pressure Recorded Yet.")
+                                        .font(.headline)
+                                    .fixedSize(horizontal: true, vertical: false)
+                                }
+                                
                             }
                         }
                     }
@@ -38,12 +43,25 @@ struct ContentView: View {
                                 .foregroundColor(.red)
                                 .shadow(color: .black, radius:  10, x: 0, y: 0)
                             }
-                            .padding([.top, .bottom])
+                            .padding([.top, .bottom], 50)
                         }
-                        HStack {
-                            Text("All Records")
-                            Image(systemName: "doc.on.doc")
+                        NavigationLink(destination: RecordsView()) { 
+                            HStack {
+                                Text("All Records")
+                                    .font(.title)
+                                Image(systemName: "doc.on.doc")
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(.red)
+                            }
+                            .padding()
+                            .background(Color.gray)
+                            .cornerRadius(10)
+                            .shadow(color: .black, radius: 10, x: 0, y: 0)
+                            .padding([.top, .bottom], 50)
                         }
+                        .foregroundColor(.black)
+                        
                     }
                     
                 }
@@ -51,6 +69,7 @@ struct ContentView: View {
             }
             .edgesIgnoringSafeArea(.all)
         }
+        .accentColor(.black)
     }
     
 }

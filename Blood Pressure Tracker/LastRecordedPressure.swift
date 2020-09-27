@@ -24,7 +24,6 @@ struct LastRecordedPressure: View {
             }
             .padding([.top, .bottom], 10)
             .background(Color.black)
-            
             HStack {
                 VStack {
                     Text("BP")
@@ -38,12 +37,10 @@ struct LastRecordedPressure: View {
                         .font(.headline)
                 }
             }
-        .padding()
+            .padding()
             .background(Color.gray)
         }
-    .cornerRadius(20)
-        .shadow(color: .black, radius: 10, x: 0, y: 0)
-        
+        .padding()
     }
     func formatDateToString() -> String {
         var returnString = "9/25/2020"

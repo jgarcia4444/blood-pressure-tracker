@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F5E3512251FF7A800079238 /* RecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5E3511251FF7A800079238 /* RecordsView.swift */; };
+		1F5E3514251FFCD700079238 /* RecordCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5E3513251FFCD700079238 /* RecordCardView.swift */; };
+		1F5E35162520166700079238 /* FilteredRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5E35152520166700079238 /* FilteredRecords.swift */; };
 		1F93C910251E824800AB960C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F93C90F251E824800AB960C /* AppDelegate.swift */; };
 		1F93C912251E824800AB960C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F93C911251E824800AB960C /* SceneDelegate.swift */; };
 		1F93C914251E824800AB960C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F93C913251E824800AB960C /* ContentView.swift */; };
@@ -19,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F5E3511251FF7A800079238 /* RecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsView.swift; sourceTree = "<group>"; };
+		1F5E3513251FFCD700079238 /* RecordCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCardView.swift; sourceTree = "<group>"; };
+		1F5E35152520166700079238 /* FilteredRecords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredRecords.swift; sourceTree = "<group>"; };
 		1F93C90C251E824800AB960C /* Blood Pressure Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blood Pressure Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F93C90F251E824800AB960C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1F93C911251E824800AB960C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +72,9 @@
 				1F93C911251E824800AB960C /* SceneDelegate.swift */,
 				1F93C927251E9CC300AB960C /* BPRecords.xcdatamodeld */,
 				1F93C925251E97BF00AB960C /* AddRecordView.swift */,
+				1F5E3511251FF7A800079238 /* RecordsView.swift */,
+				1F5E3513251FFCD700079238 /* RecordCardView.swift */,
+				1F5E35152520166700079238 /* FilteredRecords.swift */,
 				1F93C923251E88FB00AB960C /* LastRecordedPressure.swift */,
 				1F93C913251E824800AB960C /* ContentView.swift */,
 				1F93C915251E824900AB960C /* Assets.xcassets */,
@@ -156,7 +165,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F93C926251E97BF00AB960C /* AddRecordView.swift in Sources */,
+				1F5E35162520166700079238 /* FilteredRecords.swift in Sources */,
+				1F5E3512251FF7A800079238 /* RecordsView.swift in Sources */,
 				1F93C910251E824800AB960C /* AppDelegate.swift in Sources */,
+				1F5E3514251FFCD700079238 /* RecordCardView.swift in Sources */,
 				1F93C912251E824800AB960C /* SceneDelegate.swift in Sources */,
 				1F93C924251E88FB00AB960C /* LastRecordedPressure.swift in Sources */,
 				1F93C929251E9CC300AB960C /* BPRecords.xcdatamodeld in Sources */,

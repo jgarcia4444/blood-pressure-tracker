@@ -3,9 +3,10 @@
     <entity name="Record" representedClassName="Record" syncable="YES" codeGenerationType="class">
         <attribute name="dateRecorded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="diastolic" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="morning" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="systolic" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Record" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="Record" positionX="-63" positionY="-18" width="128" height="103"/>
     </elements>
 </model>
