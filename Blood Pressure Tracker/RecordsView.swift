@@ -12,6 +12,7 @@ struct RecordsView: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Record.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Record.dateRecorded, ascending: false)]) var records: FetchedResults<Record>
     @State private var filterRecordsIndex = 0
+    
     let filterOptions = ["All", "Morning", "Evening"]
     var body: some View {
         ZStack {
@@ -23,11 +24,11 @@ struct RecordsView: View {
                             Text(self.filterOptions[index]).tag(index)
                         }
                     }.pickerStyle(SegmentedPickerStyle())
-                    ForEach(self.records, id: \.self) { (record: Record) in
-                        VStack {
-                            RecordCardView(record: record)
+                    ForEach(filterRecords(), id: \.self) { (record: Record) in
+                            VStack {
+                                RecordCardView(record: record)
+                            }
                         }
-                    }
                 }
                 .offset(x: 0, y: UIScreen.main.bounds.size.height * 0.2)
             }
@@ -35,6 +36,34 @@ struct RecordsView: View {
         }
         .edgesIgnoringSafeArea(.all)
     }
+    
+    func filterRecords() -> [Record] {
+        var filteredRecords: [Record]
+        switch(filterRecordsIndex) {
+        case 0:
+            filteredRecords = self.records.filter({ (record) -> Bool in
+                record == record
+            })
+            break
+        case 1:
+            filteredRecords = self.records.filter({ (record) -> Bool in
+                record.morning == true
+            })
+            break
+        case 2:
+            filteredRecords = self.records.filter({ (record) -> Bool in
+                record.morning == false
+            })
+            break
+        default:
+            filteredRecords = self.records.filter({ (record) -> Bool in
+                record == record
+            })
+            break
+        }
+        return filteredRecords
+    }
+    
 }
 
 struct RecordsView_Previews: PreviewProvider {
