@@ -39,7 +39,9 @@ struct RecordCardView: View {
             .padding()
         }
         .background(Color.gray)
+        .shadow(radius: 10)
         .padding()
+        
     }
     func formatDateToString() -> String {
         var returnString = ""

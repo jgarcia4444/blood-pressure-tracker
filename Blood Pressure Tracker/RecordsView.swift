@@ -49,9 +49,9 @@ struct RecordsView: View {
     
     func createPageRenderer() -> UIPrintPageRenderer {
         print(self.records)
-        var recordString = ""
+        var recordString = "\(self.filterOptions[self.filterRecordsIndex]) Records\n"
         
-        self.records.forEach { (record) in
+        self.filterRecords().forEach { (record) in
             recordString += "\(formatDateToString(record: record)), Systolic: \(record.systolic) Diastolic: \(record.diastolic)\n"
         }
         let formatter = UISimpleTextPrintFormatter(text: recordString)
