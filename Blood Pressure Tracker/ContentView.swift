@@ -65,6 +65,7 @@ struct ContentView: View {
                     }
                     
                 }
+                .padding(.top, 100)
                 .navigationBarTitle("BP Tracker", displayMode: .large)
             }
             .edgesIgnoringSafeArea(.all)

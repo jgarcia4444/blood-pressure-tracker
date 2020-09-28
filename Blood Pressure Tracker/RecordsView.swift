@@ -24,6 +24,11 @@ struct RecordsView: View {
                             Text(self.filterOptions[index]).tag(index)
                         }
                     }.pickerStyle(SegmentedPickerStyle())
+                        .onAppear {
+                            UISegmentedControl.appearance().selectedSegmentTintColor = .black
+                            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+                            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black], for: .normal)
+                    }
                     ForEach(filterRecords(), id: \.self) { (record: Record) in
                             VStack {
                                 RecordCardView(record: record)
@@ -32,9 +37,41 @@ struct RecordsView: View {
                 }
                 .offset(x: 0, y: UIScreen.main.bounds.size.height * 0.2)
             }
+            .navigationBarItems(trailing: Button(action: {
+                self.setupPrinterAction()
+            }) {
+                Image(systemName: "printer")
+            })
             .navigationBarTitle(Text("Records"), displayMode: .large)
         }
         .edgesIgnoringSafeArea(.all)
+    }
+    
+    func setupPrinterAction() {
+        print("More logic to come for printing!!!!")
+        let printController = UIPrintInteractionController.shared
+        let printInfo = UIPrintInfo(dictionary: nil)
+        printInfo.outputType = .general
+        printInfo.jobName = "Blood Pressure Records"
+        printController.printInfo = printInfo
+        let pageRenderer = UIPrintPageRenderer()
+        let customPrintFormatters = self.records.map { (record) -> UISimpleTextPrintFormatter in
+            return UISimpleTextPrintFormatter(text: "Date: \(formatDateToString(record: record)) Systolic: \(record.systolic) DiaStolic: \(record.diastolic)")
+            
+            }
+        pageRenderer.printFormatters = customPrintFormatters
+        printController.present(animated: true, completionHandler: nil)
+    }
+    
+    func formatDateToString(record: Record) -> String {
+        var returnString = ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+        if let dateRecorded = record.dateRecorded {
+            returnString = dateFormatter.string(from: dateRecorded)
+        }
+        return returnString
     }
     
     func filterRecords() -> [Record] {
