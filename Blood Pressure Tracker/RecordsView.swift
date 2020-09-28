@@ -47,20 +47,23 @@ struct RecordsView: View {
         .edgesIgnoringSafeArea(.all)
     }
     
-    func setupPrinterAction() {
-        print("More logic to come for printing!!!!")
-        let printController = UIPrintInteractionController.shared
-        let printInfo = UIPrintInfo(dictionary: nil)
-        printInfo.outputType = .general
-        printInfo.jobName = "Blood Pressure Records"
-        printController.printInfo = printInfo
+    func createPageRenderer() -> UIPrintPageRenderer {
+        print(self.records)
+        var recordString = ""
+        
+        self.records.forEach { (record) in
+            recordString += "\(formatDateToString(record: record)), Systolic: \(record.systolic) Diastolic: \(record.diastolic)\n"
+        }
+        let formatter = UISimpleTextPrintFormatter(text: recordString)
         let pageRenderer = UIPrintPageRenderer()
-        let customPrintFormatters = self.records.map { (record) -> UISimpleTextPrintFormatter in
-            return UISimpleTextPrintFormatter(text: "Date: \(formatDateToString(record: record)) Systolic: \(record.systolic) DiaStolic: \(record.diastolic)")
-            
-            }
-        pageRenderer.printFormatters = customPrintFormatters
-        printController.present(animated: true, completionHandler: nil)
+        pageRenderer.addPrintFormatter(formatter, startingAtPageAt: 0)
+        return pageRenderer
+    }
+    
+    func setupPrinterAction() {
+        let recordPageRenderer = createPageRenderer()
+        let vc = UIActivityViewController(activityItems: [recordPageRenderer], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(vc, animated: true)
     }
     
     func formatDateToString(record: Record) -> String {
