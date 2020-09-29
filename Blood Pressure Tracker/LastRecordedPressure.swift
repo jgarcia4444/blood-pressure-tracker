@@ -35,6 +35,8 @@ struct LastRecordedPressure: View {
                     Text("Date")
                     Text("\(self.formatDateToString())")
                         .font(.headline)
+                    Text("\(self.formateDateToTimeString())")
+                    .font(.headline)
                 }
             }
             .padding()
@@ -42,6 +44,17 @@ struct LastRecordedPressure: View {
         }
         .shadow(radius: 10)
         .padding()
+    }
+    
+    func formateDateToTimeString() -> String {
+        var returnString = ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        if let dateRecorded = records[0].dateRecorded {
+            returnString = dateFormatter.string(from: dateRecorded)
+        }
+        return returnString
     }
     func formatDateToString() -> String {
         var returnString = "9/25/2020"

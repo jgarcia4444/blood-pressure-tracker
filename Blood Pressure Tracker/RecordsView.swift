@@ -12,30 +12,80 @@ struct RecordsView: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Record.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Record.dateRecorded, ascending: false)]) var records: FetchedResults<Record>
     @State private var filterRecordsIndex = 0
+    var avgSystolic: Float {
+        var inputCount: Int = 0
+        var sumOfSystolic: Float = 0.0
+        filterRecords().forEach { (record) in
+            inputCount += 1
+            sumOfSystolic += Float(record.systolic)
+        }
+        if sumOfSystolic == 0.0 {
+            return 0.0
+        } else {
+            return sumOfSystolic / Float(inputCount)
+        }
+        
+    }
+    var avgDiastolic: Float {
+        var inputCount: Int = 0
+        var sumOfDiastolic: Float = 0.0
+        filterRecords().forEach { (record) in
+            inputCount += 1
+            sumOfDiastolic += Float(record.diastolic)
+        }
+        if sumOfDiastolic == 0.0 {
+            return 0.0
+        } else {
+          return sumOfDiastolic / Float(inputCount)
+        }
+        
+    }
     
     let filterOptions = ["All", "Morning", "Evening"]
     var body: some View {
         ZStack {
             Color.red
             VStack {
-                ScrollView {
-                    Picker(selection: $filterRecordsIndex, label: Text("Filter")) {
-                        ForEach(0..<filterOptions.count) { index in
-                            Text(self.filterOptions[index]).tag(index)
+                VStack {
+                    ScrollView {
+                        Picker(selection: $filterRecordsIndex, label: Text("Filter")) {
+                            ForEach(0..<filterOptions.count) { index in
+                                Text(self.filterOptions[index]).tag(index)
+                            }
+                        }.pickerStyle(SegmentedPickerStyle())
+                            .onAppear {
+                                UISegmentedControl.appearance().selectedSegmentTintColor = .black
+                                UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+                                UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black], for: .normal)
                         }
-                    }.pickerStyle(SegmentedPickerStyle())
-                        .onAppear {
-                            UISegmentedControl.appearance().selectedSegmentTintColor = .black
-                            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-                            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black], for: .normal)
-                    }
-                    ForEach(filterRecords(), id: \.self) { (record: Record) in
+                        VStack {
+                            HStack {
+                                Text("\(self.filterOptions[self.filterRecordsIndex]) records avgs")
+                                    .font(.title)
+                            }
+                            HStack {
+                                VStack {
+                                    Text("Systolic")
+                                        .font(.headline)
+                                    Text("\(avgSystolic, specifier: "%.2f")")
+                                    
+                                }
+                                VStack {
+                                    Text("Diastolic")
+                                        .font(.headline)
+                                    Text("\(avgDiastolic, specifier: "%.2f")")
+                                }
+                            }
+                        }
+                        ForEach(filterRecords(), id: \.self) { (record: Record) in
                             VStack {
                                 RecordCardView(record: record)
                             }
                         }
+                    }
+                    .offset(x: 0, y: UIScreen.main.bounds.size.height * 0.2)
                 }
-                .offset(x: 0, y: UIScreen.main.bounds.size.height * 0.2)
+                .padding(.bottom, 200)
             }
             .navigationBarItems(trailing: Button(action: {
                 self.setupPrinterAction()
@@ -47,22 +97,21 @@ struct RecordsView: View {
         .edgesIgnoringSafeArea(.all)
     }
     
-    func createPageRenderer() -> UIPrintPageRenderer {
+    func createTextFormatter() -> UISimpleTextPrintFormatter {
         print(self.records)
         var recordString = "\(self.filterOptions[self.filterRecordsIndex]) Records\n"
         
         self.filterRecords().forEach { (record) in
             recordString += "\(formatDateToString(record: record)), Systolic: \(record.systolic) Diastolic: \(record.diastolic)\n"
         }
-        let formatter = UISimpleTextPrintFormatter(text: recordString)
-        let pageRenderer = UIPrintPageRenderer()
-        pageRenderer.addPrintFormatter(formatter, startingAtPageAt: 0)
-        return pageRenderer
+        return UISimpleTextPrintFormatter(text: recordString)
+        
     }
     
     func setupPrinterAction() {
-        let recordPageRenderer = createPageRenderer()
-        let vc = UIActivityViewController(activityItems: [recordPageRenderer], applicationActivities: nil)
+        let recordFormatter = createTextFormatter()
+        
+        let vc = UIActivityViewController(activityItems: [recordFormatter], applicationActivities: nil)
         UIApplication.shared.windows.first?.rootViewController?.present(vc, animated: true)
     }
     
