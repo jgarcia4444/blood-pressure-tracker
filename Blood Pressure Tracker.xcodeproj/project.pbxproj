@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		1F5E3512251FF7A800079238 /* RecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5E3511251FF7A800079238 /* RecordsView.swift */; };
 		1F5E3514251FFCD700079238 /* RecordCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5E3513251FFCD700079238 /* RecordCardView.swift */; };
+		1F8C8F902523A2F5004FE1F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F8C8F8F2523A2F5004FE1F6 /* Assets.xcassets */; };
 		1F93C910251E824800AB960C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F93C90F251E824800AB960C /* AppDelegate.swift */; };
 		1F93C912251E824800AB960C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F93C911251E824800AB960C /* SceneDelegate.swift */; };
 		1F93C914251E824800AB960C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F93C913251E824800AB960C /* ContentView.swift */; };
-		1F93C916251E824900AB960C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F93C915251E824900AB960C /* Assets.xcassets */; };
 		1F93C919251E824900AB960C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F93C918251E824900AB960C /* Preview Assets.xcassets */; };
 		1F93C91C251E824900AB960C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F93C91A251E824900AB960C /* LaunchScreen.storyboard */; };
 		1F93C924251E88FB00AB960C /* LastRecordedPressure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F93C923251E88FB00AB960C /* LastRecordedPressure.swift */; };
@@ -23,11 +23,11 @@
 /* Begin PBXFileReference section */
 		1F5E3511251FF7A800079238 /* RecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsView.swift; sourceTree = "<group>"; };
 		1F5E3513251FFCD700079238 /* RecordCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCardView.swift; sourceTree = "<group>"; };
+		1F8C8F8F2523A2F5004FE1F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F93C90C251E824800AB960C /* Blood Pressure Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blood Pressure Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F93C90F251E824800AB960C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1F93C911251E824800AB960C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1F93C913251E824800AB960C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		1F93C915251E824900AB960C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F93C918251E824900AB960C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1F93C91B251E824900AB960C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1F93C91D251E824900AB960C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 				1F5E3513251FFCD700079238 /* RecordCardView.swift */,
 				1F93C923251E88FB00AB960C /* LastRecordedPressure.swift */,
 				1F93C913251E824800AB960C /* ContentView.swift */,
-				1F93C915251E824900AB960C /* Assets.xcassets */,
+				1F8C8F8F2523A2F5004FE1F6 /* Assets.xcassets */,
 				1F93C91A251E824900AB960C /* LaunchScreen.storyboard */,
 				1F93C91D251E824900AB960C /* Info.plist */,
 				1F93C917251E824900AB960C /* Preview Content */,
@@ -149,8 +149,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F93C91C251E824900AB960C /* LaunchScreen.storyboard in Resources */,
+				1F8C8F902523A2F5004FE1F6 /* Assets.xcassets in Resources */,
 				1F93C919251E824900AB960C /* Preview Assets.xcassets in Resources */,
-				1F93C916251E824900AB960C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

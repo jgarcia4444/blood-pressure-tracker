@@ -87,11 +87,11 @@ struct RecordsView: View {
                 }
                 .padding(.bottom, 200)
             }
-            .navigationBarItems(trailing: Button(action: {
-                self.setupPrinterAction()
-            }) {
-                Image(systemName: "printer")
-            })
+//            .navigationBarItems(trailing: Button(action: {
+//                self.setupPrinterAction()
+//            }) {
+//                Image(systemName: "printer")
+//            })
             .navigationBarTitle(Text("Records"), displayMode: .large)
         }
         .edgesIgnoringSafeArea(.all)
@@ -110,8 +110,8 @@ struct RecordsView: View {
     
     func setupPrinterAction() {
         let recordFormatter = createTextFormatter()
-        
         let vc = UIActivityViewController(activityItems: [recordFormatter], applicationActivities: nil)
+        vc.isModalInPresentation = true
         UIApplication.shared.windows.first?.rootViewController?.present(vc, animated: true)
     }
     
