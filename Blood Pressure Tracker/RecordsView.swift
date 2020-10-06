@@ -87,6 +87,9 @@ struct RecordsView: View {
                 }
                 .padding(.bottom, 200)
             }
+                // MARK: TODO
+                // NOT WORKING ON PHYSICAL DEVICE
+                // NO TEXT SHOWS UP ON THE PAGE TO BE PRINTED
 //            .navigationBarItems(trailing: Button(action: {
 //                self.setupPrinterAction()
 //            }) {
@@ -98,7 +101,6 @@ struct RecordsView: View {
     }
     
     func createTextFormatter() -> UISimpleTextPrintFormatter {
-        print(self.records)
         var recordString = "\(self.filterOptions[self.filterRecordsIndex]) Records\n"
         
         self.filterRecords().forEach { (record) in
@@ -111,7 +113,6 @@ struct RecordsView: View {
     func setupPrinterAction() {
         let recordFormatter = createTextFormatter()
         let vc = UIActivityViewController(activityItems: [recordFormatter], applicationActivities: nil)
-        vc.isModalInPresentation = true
         UIApplication.shared.windows.first?.rootViewController?.present(vc, animated: true)
     }
     
