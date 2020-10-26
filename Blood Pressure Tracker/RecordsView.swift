@@ -103,7 +103,9 @@ struct RecordsView: View {
     func createTextFormatter() -> UISimpleTextPrintFormatter {
         print("Hello World")
         var recordString = "\(self.filterOptions[self.filterRecordsIndex]) Records\n"
-        
+        let filter = self.filterOptions[self.filterRecordsIndex]
+        recordString += "Avg \(filter) Systolic: \(avgSystolic)\n"
+        recordString += "Avg \(filter) Diastolic: \(avgDiastolic)\n"
         self.filterRecords().forEach { (record) in
             recordString += "\(formatDateToString(record: record)), Systolic: \(record.systolic) Diastolic: \(record.diastolic)\n"
         }
