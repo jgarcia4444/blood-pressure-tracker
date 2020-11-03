@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color.red
+                LinearGradient(gradient: Gradient(colors: [.red, .black]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 VStack {
                     VStack {
                         HStack {
@@ -66,7 +66,7 @@ struct ContentView: View {
                     
                 }
                 .padding(.top, 100)
-                .navigationBarTitle("BP Tracker", displayMode: .large)
+                .navigationBarTitle("BP Numbers", displayMode: .large)
             }
             .edgesIgnoringSafeArea(.all)
         }

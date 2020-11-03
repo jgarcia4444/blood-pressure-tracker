@@ -16,7 +16,7 @@ struct AddRecordView: View {
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         ZStack {
-            Color.red
+            LinearGradient(gradient: Gradient(colors: [.red, .black]), startPoint: .topLeading, endPoint: .bottomTrailing)
             VStack {
                 VStack {
                     HStack {

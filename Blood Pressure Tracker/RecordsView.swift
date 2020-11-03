@@ -44,7 +44,7 @@ struct RecordsView: View {
     let filterOptions = ["All", "Morning", "Evening"]
     var body: some View {
         ZStack {
-            Color.red
+            LinearGradient(gradient: Gradient(colors: [.red, .black]), startPoint: .topLeading, endPoint: .bottomTrailing)
             VStack {
                 VStack {
                     ScrollView {

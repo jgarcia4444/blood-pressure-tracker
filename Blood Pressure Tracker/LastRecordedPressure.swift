@@ -42,9 +42,11 @@ struct LastRecordedPressure: View {
             .padding()
             .background(Color.gray)
         }
-        .shadow(radius: 10)
+    .shadow(radius: 10)
         .padding()
     }
+    
+
     
     func formateDateToTimeString() -> String {
         var returnString = ""
