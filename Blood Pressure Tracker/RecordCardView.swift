@@ -16,8 +16,6 @@ struct RecordCardView: View {
                 Text(formatDateToString())
             }
             .padding()
-            .background(Color.black)
-            .foregroundColor(.red)
             HStack {
                 VStack {
                     Text("Systolic")
@@ -37,9 +35,9 @@ struct RecordCardView: View {
                 }
             }
             .padding()
+            .background(Color.white.cornerRadius(5).shadow(color: .black, radius: 5, x: 0, y: 10))
         }
-        .background(Color.gray)
-        .shadow(radius: 10)
+        
         .padding()
         
     }

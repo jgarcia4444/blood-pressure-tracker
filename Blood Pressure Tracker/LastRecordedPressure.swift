@@ -14,36 +14,37 @@ struct LastRecordedPressure: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: Record.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Record.dateRecorded, ascending: false)]) var records: FetchedResults<Record>
     var body: some View {
-        VStack {
-            HStack {
-                Spacer()
-                Text("Last record")
-                    .font(.largeTitle)
-                    .foregroundColor(.red)
-                Spacer()
-            }
-            .padding([.top, .bottom], 10)
-            .background(Color.black)
-            HStack {
-                VStack {
-                    Text("BP")
-                    Text("\(records[0].systolic) / \(records[0].diastolic)")
-                    .font(.largeTitle)
+            VStack {
+                HStack {
+                    Spacer()
+                    Text("Last record")
+                        .font(.largeTitle)
+//                        .foregroundColor(.white)
+                    Spacer()
                 }
-                Spacer()
-                VStack{
-                    Text("Date")
-                    Text("\(self.formatDateToString())")
-                        .font(.headline)
-                    Text("\(self.formateDateToTimeString())")
-                    .font(.headline)
+                .padding([.top, .bottom], 10)
+//                .background(Color.black)
+                HStack {
+                    VStack {
+                        Text("BP")
+                        Text("\(self.records[0].systolic) / \(self.records[0].diastolic)")
+                            .font(.largeTitle)
+                    }
+                    Spacer()
+                    VStack{
+                        Text("Date")
+                        Text("\(self.formatDateToString())")
+                            .font(.headline)
+                        Text("\(self.formateDateToTimeString())")
+                            .font(.headline)
+                    }
                 }
+                .padding()
+                .background(Color.white.cornerRadius(5).shadow(color: .black, radius: 5, x: 0, y: 10))
             }
+            
+    
             .padding()
-            .background(Color.gray)
-        }
-    .shadow(radius: 10)
-        .padding()
     }
     
 

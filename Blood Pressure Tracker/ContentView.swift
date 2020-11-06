@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [.red, .black]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                LinearGradient(gradient: Gradient(colors: [.white, .gray]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 VStack {
                     VStack {
                         HStack {
@@ -38,10 +38,10 @@ struct ContentView: View {
                                 .resizable()
                                 .frame(width: 40, height: 40)
                                 .padding()
-                                .background(Color.gray)
+                                .background(Color.white)
                                 .clipShape(Circle())
                                 .foregroundColor(.red)
-                                .shadow(color: .black, radius:  10, x: 0, y: 0)
+                                .shadow(color: .black, radius: 3, x: 0, y: 3)
                             }
                             .padding([.top, .bottom], 50)
                         }
@@ -55,9 +55,9 @@ struct ContentView: View {
                                     .foregroundColor(.red)
                             }
                             .padding()
-                            .background(Color.gray)
+                            .background(Color.white)
                             .cornerRadius(10)
-                            .shadow(color: .black, radius: 10, x: 0, y: 0)
+                            .shadow(color: .black, radius: 3, x: 0, y: 3)
                             .padding([.top, .bottom], 50)
                         }
                         .foregroundColor(.black)

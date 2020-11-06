@@ -16,12 +16,15 @@ struct AddRecordView: View {
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.red, .black]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(gradient: Gradient(colors: [.white, .gray]), startPoint: .topLeading, endPoint: .bottomTrailing)
             VStack {
+                Spacer()
                 VStack {
                     HStack {
                         TextField("Systolic", text: $systolic)
+                            .shadow(color: .black, radius: 3, x: 0, y: 3)
                         TextField("Diastolic", text: $diastolic)
+                            .shadow(color: .black, radius: 3, x: 0, y: 3)
                     }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.numberPad)
@@ -41,10 +44,11 @@ struct AddRecordView: View {
                             .background(Color.gray)
                             .clipShape(Capsule())
                             .foregroundColor(.red)
-                            .shadow(color: .black, radius:  10, x: 0, y: 0)
+                            .shadow(color: .black, radius:  3, x: 0, y: 3)
                     }
                 
                 }
+                Spacer()
             }
         
         }
