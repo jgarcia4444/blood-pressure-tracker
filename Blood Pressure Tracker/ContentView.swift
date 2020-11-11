@@ -50,7 +50,7 @@ struct ContentView: View {
                             }
                             .padding([.top, .bottom], 50)
                         }
-                        NavigationLink(destination: RecordsView()) { 
+                        NavigationLink(destination: withAnimation{RecordsView()}.animation(.default)) { 
                             HStack {
                                 Text("All Records")
                                     .font(.title)

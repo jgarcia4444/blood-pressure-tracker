@@ -37,15 +37,24 @@ struct AddRecordView: View {
                 .padding()
                 VStack {
                     Button(action: {
-                        self.saveBP()
-                    }) {
+                        withAnimation {
+                            self.saveBP()
+                        }
+                        }) {
                         Text("Add Record")
                             .padding()
-                            .background(Color.gray)
+                        .overlay(
+                            Capsule()
+                                .stroke(lineWidth: 3)
+                                .foregroundColor(.black)
+                        )
+                            .background(LinearGradient(gradient: Gradient(colors: [.white, .gray]), startPoint: .topLeading, endPoint: .bottomTrailing))
                             .clipShape(Capsule())
-                            .foregroundColor(.red)
+                            .foregroundColor(.black)
                             .shadow(color: .black, radius:  3, x: 0, y: 3)
                     }
+                    .animation(.easeOut
+                    )
                 }
                 Spacer()
             }

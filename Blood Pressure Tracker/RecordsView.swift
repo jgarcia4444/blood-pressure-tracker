@@ -48,7 +48,7 @@ struct RecordsView: View {
             VStack {
                 VStack {
                     ScrollView {
-                        Picker(selection: $filterRecordsIndex, label: Text("Filter")) {
+                        Picker(selection: $filterRecordsIndex.animation(.default), label: Text("Filter")) {
                             ForEach(0..<filterOptions.count) { index in
                                 Text(self.filterOptions[index]).tag(index)
                             }
