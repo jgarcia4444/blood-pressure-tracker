@@ -87,9 +87,6 @@ struct RecordsView: View {
                 }
                 .padding(.bottom, 200)
             }
-                // MARK: TODO
-                // NOT WORKING ON PHYSICAL DEVICE
-                // NO TEXT SHOWS UP ON THE PAGE TO BE PRINTED
             .navigationBarItems(trailing: Button(action: {
                 self.setupPrinterAction()
             }) {

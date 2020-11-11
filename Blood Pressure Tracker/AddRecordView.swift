@@ -46,14 +46,11 @@ struct AddRecordView: View {
                             .foregroundColor(.red)
                             .shadow(color: .black, radius:  3, x: 0, y: 3)
                     }
-                
                 }
                 Spacer()
             }
-        
         }
         .navigationBarTitle("Blood Pressure", displayMode: .large)
-        
         .edgesIgnoringSafeArea(.all)
         .alert(isPresented: $recordSaved) {
             Alert(title: Text("Record Saved"), message: Text("Your blood pressure input has been saved."), dismissButton: .default(Text("Okay"), action: {

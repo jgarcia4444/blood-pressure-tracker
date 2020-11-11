@@ -38,6 +38,11 @@ struct ContentView: View {
                                 .resizable()
                                 .frame(width: 40, height: 40)
                                 .padding()
+                                .overlay(
+                                    Circle()
+                                        .stroke(lineWidth: 3)
+                                        .foregroundColor(.black)
+                                )
                                 .background(Color.white)
                                 .clipShape(Circle())
                                 .foregroundColor(.red)
@@ -55,6 +60,10 @@ struct ContentView: View {
                                     .foregroundColor(.red)
                             }
                             .padding()
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(lineWidth: 3)
+                                )
                             .background(Color.white)
                             .cornerRadius(10)
                             .shadow(color: .black, radius: 3, x: 0, y: 3)
@@ -66,13 +75,31 @@ struct ContentView: View {
                     
                 }
                 .padding(.top, 100)
-                .navigationBarTitle("BP Numbers", displayMode: .large)
+                .navigationBarTitle(Text("BP Numbers").foregroundColor(.black), displayMode: .large)
             }
             .edgesIgnoringSafeArea(.all)
+            .background(NavigationConfigurator { nc in
+                nc.navigationBar.barTintColor = .white
+                nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+            })
         }
-        .accentColor(.black)
+    .navigationViewStyle(StackNavigationViewStyle())
     }
     
+}
+
+struct NavigationConfigurator: UIViewControllerRepresentable {
+    var configure: (UINavigationController) -> Void = { _ in }
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
+        UIViewController()
+    }
+    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<NavigationConfigurator>) {
+        if let nc = uiViewController.navigationController {
+            self.configure(nc)
+        }
+    }
+
 }
 
 struct ContentView_Previews: PreviewProvider {

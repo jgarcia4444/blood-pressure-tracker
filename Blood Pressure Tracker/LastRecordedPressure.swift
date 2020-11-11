@@ -19,7 +19,7 @@ struct LastRecordedPressure: View {
                     Spacer()
                     Text("Last record")
                         .font(.largeTitle)
-//                        .foregroundColor(.white)
+                        .foregroundColor(.black)
                     Spacer()
                 }
                 .padding([.top, .bottom], 10)
@@ -40,7 +40,13 @@ struct LastRecordedPressure: View {
                     }
                 }
                 .padding()
-                .background(Color.white.cornerRadius(5).shadow(color: .black, radius: 5, x: 0, y: 10))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(lineWidth: 3)
+                    )
+                .background(Color.white.cornerRadius(5).clipShape(RoundedRectangle(cornerRadius: 15)).shadow(color: .black, radius: 5, x: 0, y: 10))
+                .foregroundColor(.black)
+                
             }
             
     

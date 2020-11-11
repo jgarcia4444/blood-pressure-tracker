@@ -35,11 +35,14 @@ struct RecordCardView: View {
                 }
             }
             .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(lineWidth: 3)
+                )
             .background(Color.white.cornerRadius(5).shadow(color: .black, radius: 5, x: 0, y: 10))
+            .foregroundColor(.black)
         }
-        
         .padding()
-        
     }
     func formatDateToString() -> String {
         var returnString = ""
