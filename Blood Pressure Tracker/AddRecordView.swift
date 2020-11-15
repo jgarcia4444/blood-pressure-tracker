@@ -12,7 +12,7 @@ struct AddRecordView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @State private var systolic = ""
     @State private var diastolic = ""
-    @State private var recordSaved = false
+    @State private var displayEntryConfirmAlert = false
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         ZStack {
@@ -38,7 +38,7 @@ struct AddRecordView: View {
                 VStack {
                     Button(action: {
                         withAnimation {
-                            self.saveBP()
+                            self.displayEntryConfirmAlert = true
                         }
                         }) {
                         Text("Add Record")
@@ -61,15 +61,15 @@ struct AddRecordView: View {
         }
         .navigationBarTitle("Blood Pressure", displayMode: .large)
         .edgesIgnoringSafeArea(.all)
-        .alert(isPresented: $recordSaved) {
-            Alert(title: Text("Record Saved"), message: Text("Your blood pressure input has been saved."), dismissButton: .default(Text("Okay"), action: {
-                self.presentationMode.wrappedValue.dismiss()
-            }))
+        .alert(isPresented: $displayEntryConfirmAlert) {
+            Alert(title: Text("New BP Entry"), message: Text("Your blood pressure input of \(systolic) / \(diastolic) (systolic/diastolic) will be saved when confirmed."), primaryButton: .default(Text("Confirm"), action: {
+                self.saveBP()
+            }), secondaryButton: .cancel(Text("Cancel")) )
         }
     }
+    
     func saveBP() {
-        let context = managedObjectContext
-        let newRecord = Record(context: context)
+        let newRecord = Record(context: managedObjectContext)
         guard let systolicInput = Int16(systolic) else {
             print("Unable to convert systolic input to int")
             return
@@ -90,11 +90,11 @@ struct AddRecordView: View {
         }
         
         do {
-            try context.save()
+            try managedObjectContext.save()
         } catch {
             print("\(error.localizedDescription)")
         }
-        recordSaved = true
+        self.presentationMode.wrappedValue.dismiss()
     }
     
     func checkTime(dateRecorded: Date) -> Bool {

@@ -9,7 +9,11 @@
 import SwiftUI
 
 struct RecordCardView: View {
+    @Environment(\.managedObjectContext) var moc
     var record: Record
+    @State private var newSystolic = ""
+    @State private var newDiastolic = ""
+    @State private var editingRecord = false
     var body: some View {
         VStack {
             HStack {
@@ -19,19 +23,31 @@ struct RecordCardView: View {
             HStack {
                 VStack {
                     Text("Systolic")
-//                        .font(.title)
                         .fontWeight(.black)
                         .padding()
-                    Text("\(String(record.systolic))")
-                    .fontWeight(.bold)
+                    if editingRecord {
+                        TextField("\(record.systolic)", text: $newSystolic )
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .keyboardType(.numberPad)
+                    } else {
+                        Text("\(String(record.systolic))")
+                        .fontWeight(.bold)
+                    }
+                    
                 }
                 VStack {
                     Text("Diastolic")
-//                        .font(.title)
                         .fontWeight(.black)
                         .padding()
-                    Text("\(String(record.diastolic))")
-                        .fontWeight(.bold)
+                    if editingRecord {
+                        TextField("\(record.diastolic)", text: $newDiastolic)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .keyboardType(.numberPad)
+                    } else {
+                        Text("\(String(record.diastolic))")
+                            .fontWeight(.bold)
+                    }
+                    
                 }
             }
             .padding()
@@ -41,9 +57,74 @@ struct RecordCardView: View {
                 )
             .background(Color.white.cornerRadius(5).shadow(color: .black, radius: 5, x: 0, y: 10))
             .foregroundColor(.black)
+            HStack {
+                if self.editingRecord {
+                    Button(action: {
+                        self.updateBP()
+                    }) {
+                        Text("Confirm")
+                    }
+                } else {
+                    HStack {
+                        Button(action: {
+                            self.editingRecord = true
+                            self.newSystolic = String(self.record.systolic)
+                            self.newDiastolic = String(self.record.diastolic)
+                        }) {
+                            Text("Edit")
+                        }
+                        .frame(width: 70, height: 40)
+                        .background(Color.white)
+                        .cornerRadius(20)
+                        .shadow(color: .black, radius: 5, x: -2, y: 5)
+                        .padding(.trailing, 10)
+                        Button(action: {
+                            self.deleteBP()
+                        }) {
+                            Image(systemName: "trash.fill")
+                                .foregroundColor(.red)
+                        }
+                        .frame(width: 70, height: 40)
+                        .background(Color.white)
+                        .cornerRadius(20)
+                        .shadow(color: .black, radius: 5, x: -2, y: 5)
+                        .padding(.leading, 10)
+                    }
+                    .padding(.top, 10)
+                }
+            }
         }
         .padding()
     }
+    
+    func deleteBP() {
+        self.moc.delete(self.record)
+        do {
+            try self.moc.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func updateBP() {
+        guard let updatedSystolic = Int16(self.newSystolic) else {
+            print("Unable to turn updated systolic into an integer")
+            return
+        }
+        guard let updatedDiastolic = Int16(self.newDiastolic) else {
+            print("Unable to turn updated diastolic into an integer")
+            return
+        }
+        record.systolic = updatedSystolic
+        record.diastolic = updatedDiastolic
+        do {
+            try moc.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+        self.editingRecord = false
+    }
+    
     func formatDateToString() -> String {
         var returnString = ""
         let dateFormatter = DateFormatter()
