@@ -18,6 +18,7 @@
 		1F93C924251E88FB00AB960C /* LastRecordedPressure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F93C923251E88FB00AB960C /* LastRecordedPressure.swift */; };
 		1F93C926251E97BF00AB960C /* AddRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F93C925251E97BF00AB960C /* AddRecordView.swift */; };
 		1F93C929251E9CC300AB960C /* BPRecords.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F93C927251E9CC300AB960C /* BPRecords.xcdatamodeld */; };
+		1FC0966C25E9D3FD008C348A /* ToDo.md in Resources */ = {isa = PBXBuildFile; fileRef = 1FC0966B25E9D3FD008C348A /* ToDo.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		1F93C923251E88FB00AB960C /* LastRecordedPressure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastRecordedPressure.swift; sourceTree = "<group>"; };
 		1F93C925251E97BF00AB960C /* AddRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordView.swift; sourceTree = "<group>"; };
 		1F93C928251E9CC300AB960C /* BPRecords.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BPRecords.xcdatamodel; sourceTree = "<group>"; };
+		1FC0966B25E9D3FD008C348A /* ToDo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ToDo.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				1F93C91A251E824900AB960C /* LaunchScreen.storyboard */,
 				1F93C91D251E824900AB960C /* Info.plist */,
 				1F93C917251E824900AB960C /* Preview Content */,
+				1FC0966B25E9D3FD008C348A /* ToDo.md */,
 			);
 			path = "Blood Pressure Tracker";
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FC0966C25E9D3FD008C348A /* ToDo.md in Resources */,
 				1F93C91C251E824900AB960C /* LaunchScreen.storyboard in Resources */,
 				1F8C8F902523A2F5004FE1F6 /* Assets.xcassets in Resources */,
 				1F93C919251E824900AB960C /* Preview Assets.xcassets in Resources */,
