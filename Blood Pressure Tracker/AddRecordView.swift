@@ -10,59 +10,67 @@ import SwiftUI
 
 struct AddRecordView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
-    @State private var systolic = ""
-    @State private var diastolic = ""
+    @State private var systolic : Int16? = 0
+    @State private var diastolic : Int16? = 0
     @State private var displayEntryConfirmAlert = false
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.white, .gray]), startPoint: .topLeading, endPoint: .bottomTrailing)
-            VStack {
-                Spacer()
+            ScrollView {
                 VStack {
-                    HStack {
-                        TextField("Systolic", text: $systolic)
-                            .shadow(color: .black, radius: 3, x: 0, y: 3)
-                        TextField("Diastolic", text: $diastolic)
-                            .shadow(color: .black, radius: 3, x: 0, y: 3)
-                    }
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.numberPad)
-                }
-                .padding()
-                HStack {
-                    Text(systolic.count > 0 || diastolic.count > 0 ? "\(systolic) / \(diastolic)" : "")
-                        .font(.largeTitle)
-                }
-                .padding()
-                VStack {
-                    Button(action: {
-                        withAnimation {
-                            self.displayEntryConfirmAlert = true
+//                    Spacer()
+                    VStack {
+                        Section {
+                            Text("Systolic")
+                            Picker(selection: $systolic, label: Text("Systolic")) {
+                                ForEach(0..<241) {
+                                    Text("\($0)")
+                                }
+                            }
+                            .pickerStyle(WheelPickerStyle())
                         }
-                        }) {
-                        Text("Add Record")
-                            .padding()
-                        .overlay(
-                            Capsule()
-                                .stroke(lineWidth: 3)
-                                .foregroundColor(.black)
-                        )
-                            .background(LinearGradient(gradient: Gradient(colors: [.white, .gray]), startPoint: .topLeading, endPoint: .bottomTrailing))
-                            .clipShape(Capsule())
-                            .foregroundColor(.black)
-                            .shadow(color: .black, radius:  3, x: 0, y: 3)
+                        Section {
+                            Text("Diastolic")
+                            Picker(selection: $diastolic, label: Text("Diastolic")) {
+                                ForEach(0..<241) {
+                                    Text("\($0)")
+                                }
+                            }
+                            .pickerStyle(WheelPickerStyle())
+                        }
+                        
                     }
-                    .animation(.easeOut
-                    )
+                    .padding(.top, 125)
+                    VStack {
+                        Button(action: {
+                            withAnimation {
+                                self.displayEntryConfirmAlert = true
+                            }
+                            }) {
+                            Text("Add Record")
+                                .padding()
+                            .overlay(
+                                Capsule()
+                                    .stroke(lineWidth: 3)
+                                    .foregroundColor(.black)
+                            )
+                                .background(LinearGradient(gradient: Gradient(colors: [.white, .gray]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                                .clipShape(Capsule())
+                                .foregroundColor(.black)
+                                .shadow(color: .black, radius:  3, x: 0, y: 3)
+                        }
+                        .animation(.easeOut)
+                        .disabled(self.systolic == 0 || self.diastolic == 0)
+                    }
+//                    Spacer()
                 }
-                Spacer()
             }
         }
         .navigationBarTitle("Blood Pressure", displayMode: .large)
         .edgesIgnoringSafeArea(.all)
         .alert(isPresented: $displayEntryConfirmAlert) {
-            Alert(title: Text("New BP Entry"), message: Text("Your blood pressure input of \(systolic) / \(diastolic) (systolic/diastolic) will be saved when confirmed."), primaryButton: .default(Text("Confirm"), action: {
+            Alert(title: Text("New BP Entry"), message: Text("Your blood pressure input of \(systolic!) / \(diastolic!) (systolic/diastolic) will be saved when confirmed."), primaryButton: .default(Text("Confirm"), action: {
                 self.saveBP()
             }), secondaryButton: .cancel(Text("Cancel")) )
         }
@@ -70,19 +78,12 @@ struct AddRecordView: View {
     
     func saveBP() {
         let newRecord = Record(context: managedObjectContext)
-        guard let systolicInput = Int16(systolic) else {
-            print("Unable to convert systolic input to int")
-            return
-        }
-        guard let diastolicInput = Int16(diastolic) else {
-            print("Unable to convert diastolic input to int")
-            return
-        }
+        let systolicInput = Int16(systolic!)
+        let diastolicInput = Int16(diastolic!)
+        
         newRecord.systolic = systolicInput
         newRecord.diastolic = diastolicInput
         newRecord.dateRecorded = Date()
-        
-        
         
         if let dateRecorded = newRecord.dateRecorded {
             let isMorning = self.checkTime(dateRecorded: dateRecorded)
