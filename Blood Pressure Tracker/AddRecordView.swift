@@ -37,19 +37,29 @@ struct AddRecordView: View {
                                 }
                                 Spacer()
                             }
-                        .padding(.bottom, 20)
+                        .padding([.bottom, .top], 20)
                         VStack {
+                            HStack {
                                 Text("Notes")
-                                TextEditor(text: $notes)
-                                    .frame(width: 350, height: 50 )
-                                    .cornerRadius(5)
-                                Text("Was there a specific reason you recorded your blood pressure")
-                                    .font(.caption)
+                                Spacer()
+                            }
+                            .padding(.leading, 20)
+                            TextEditor(text: $notes)
+                                .frame(width: 350, height: 50 )
+                                .cornerRadius(5)
+                            Text("Was there a specific reason you recorded your blood pressure")
+                                .font(.caption)
                             }
                         .padding(.bottom, 50)
+                        .onTapGesture {
+                            hideKeyboard()
+                        }
                         VStack {
                                 Text("Which arm did you take your reading on?")
                                     .font(.headline)
+                                    .onTapGesture {
+                                        hideKeyboard()
+                                    }
                                 Picker("Arm Reading", selection: $armTaken) {
                                     ForEach(0..<armTakenOptions.count) {
                                         Text(armTakenOptions[$0]).tag(armTakenOptions[$0])
@@ -58,7 +68,7 @@ struct AddRecordView: View {
                                 .pickerStyle(SegmentedPickerStyle())
                             }
                         }
-                        .padding(.top, 125)
+                    .padding([.top, .bottom], 125)
                         VStack {
                             Button(action: {
                                 withAnimation {
@@ -78,7 +88,7 @@ struct AddRecordView: View {
                                     .shadow(color: .black, radius:  3, x: 0, y: 3)
                             }
                             .animation(.easeOut)
-                            .disabled(self.systolic.count == 0 || self.diastolic.count == 0)
+                            .disabled(disableAddRecordButton())
                         }
                     }
                 }
@@ -90,6 +100,19 @@ struct AddRecordView: View {
                     self.saveBP()
                 }), secondaryButton: .cancel(Text("Cancel")) )
             }
+    }
+    
+    func disableAddRecordButton() -> Bool {
+        let systolicCount = self.systolic.count
+        let diastolicCount = self.diastolic.count
+        let systolicCountInRange = systolicCount > 0 && systolicCount < 4 ? true : false
+        let diastolicCountInRange = diastolicCount > 0 && diastolicCount < 4 ? true : false
+        if systolicCountInRange && diastolicCountInRange {
+            if self.armTaken != "" {
+                return false
+            }
+        }
+        return true
     }
     
     func saveBP() {
@@ -105,6 +128,8 @@ struct AddRecordView: View {
         
         newRecord.systolic = systolicInput
         newRecord.diastolic = diastolicInput
+        newRecord.notes = notes
+        newRecord.armTaken = armTaken
         newRecord.dateRecorded = Date()
         
         if let dateRecorded = newRecord.dateRecorded {
@@ -134,6 +159,15 @@ struct AddRecordView: View {
     }
     
 }
+
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+    
+}
+#endif
 
 struct AddRecordView_Previews: PreviewProvider {
     static var previews: some View {
