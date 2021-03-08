@@ -17,6 +17,8 @@ struct AddRecordView: View {
     @State private var armTaken = ""
     private var armTakenOptions = ["Right", "Left"]
     @Environment(\.presentationMode) var presentationMode
+    let activeButtonBG = LinearGradient(gradient: Gradient(colors: [.white, .gray]), startPoint: .topLeading, endPoint: .bottomTrailing)
+    let disabledButtonBG = LinearGradient(gradient: Gradient(colors: [.black, .gray]), startPoint: .topLeading, endPoint: .bottomTrailing).opacity(0.5) as? LinearGradient
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.white, .gray]), startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -82,10 +84,10 @@ struct AddRecordView: View {
                                             .stroke(lineWidth: 3)
                                             .foregroundColor(.black)
                                     )
-                                    .background(LinearGradient(gradient: Gradient(colors: [.white, .gray]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                                    .background(disableAddRecordButton() ? disabledButtonBG : activeButtonBG)
                                     .clipShape(Capsule())
                                     .foregroundColor(.black)
-                                    .shadow(color: .black, radius:  3, x: 0, y: 3)
+                                    .shadow(color: .black, radius: disableAddRecordButton() ? 0 : 3, x: 0, y: disableAddRecordButton() ? 0 : 3)
                             }
                             .animation(.easeOut)
                             .disabled(disableAddRecordButton())

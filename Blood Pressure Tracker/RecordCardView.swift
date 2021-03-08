@@ -14,12 +14,15 @@ struct RecordCardView: View {
     @State private var newSystolic = ""
     @State private var newDiastolic = ""
     @State private var editingRecord = false
+    @State private var newNotes = ""
+    @State private var newArmTaken = ""
     var body: some View {
         VStack {
             HStack {
                 Text(formatDateToString())
             }
             .padding()
+            VStack {
             HStack {
                 VStack {
                     Text("Systolic")
@@ -49,6 +52,14 @@ struct RecordCardView: View {
                     }
                     
                 }
+                
+            }
+                if editingRecord {
+                    VStack {
+                        Text("Notes")
+                        TextEditor(text: $newNotes)
+                    }
+                }
             }
             .padding()
                 .overlay(
@@ -70,6 +81,8 @@ struct RecordCardView: View {
                             self.editingRecord = true
                             self.newSystolic = String(self.record.systolic)
                             self.newDiastolic = String(self.record.diastolic)
+                            self.newNotes = String(self.record.notes ?? "")
+                            self.newArmTaken = String(self.record.armTaken ?? "")
                         }) {
                             Text("Edit")
                         }
@@ -115,8 +128,11 @@ struct RecordCardView: View {
             print("Unable to turn updated diastolic into an integer")
             return
         }
+        
         record.systolic = updatedSystolic
         record.diastolic = updatedDiastolic
+        record.notes = newNotes
+        record.armTaken = newArmTaken
         do {
             try moc.save()
         } catch {
