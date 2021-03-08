@@ -14,6 +14,8 @@ struct AddRecordView: View {
     @State private var diastolic = ""
     @State private var notes = ""
     @State private var displayEntryConfirmAlert = false
+    @State private var armTaken = ""
+    private var armTakenOptions = ["Right", "Left"]
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         ZStack {
@@ -43,6 +45,17 @@ struct AddRecordView: View {
                                     .cornerRadius(5)
                                 Text("Was there a specific reason you recorded your blood pressure")
                                     .font(.caption)
+                            }
+                        .padding(.bottom, 50)
+                        VStack {
+                                Text("Which arm did you take your reading on?")
+                                    .font(.headline)
+                                Picker("Arm Reading", selection: $armTaken) {
+                                    ForEach(0..<armTakenOptions.count) {
+                                        Text(armTakenOptions[$0]).tag(armTakenOptions[$0])
+                                    }
+                                }
+                                .pickerStyle(SegmentedPickerStyle())
                             }
                         }
                         .padding(.top, 125)
