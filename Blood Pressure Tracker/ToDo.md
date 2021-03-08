@@ -4,4 +4,9 @@
 - [ ] Stylize the confirm btn that displays when a record is chosen to edit.
 
 ## Adding A New Entry
-- [ ] Update the core data model Record with new attributes, such as an optional string attribute for notes and a string attribute for the arm the record was taken on.
+- [x] Update the core data model Record with new attributes, such as an optional string attribute for notes and a string attribute for the arm the record was taken on.
+- [ ] Add these new inputs from the user into the saving process of a new bp record.
+
+## Print formatting
+- [ ] If a user has notes associated with a record show them otherwise display none
+- [ ] display the arm that the bp record was taken on.
