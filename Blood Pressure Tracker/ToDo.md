@@ -10,7 +10,7 @@
 
 ## Record Card View
 - [x] Users can now edit their notes and arm taken part of the record.
-- [ ] Add in a details btn that then expands the record view when clicked and displays the notes as well as the arm the record was taken on.
+- [x] Add in a details btn that then expands the record view when clicked and displays the notes as well as the arm the record was taken on.
 
 
 ## Print formatting

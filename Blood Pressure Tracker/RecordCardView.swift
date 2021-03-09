@@ -16,14 +16,29 @@ struct RecordCardView: View {
     @State private var editingRecord = false
     @State private var newNotes = ""
     @State private var newArmTaken = ""
+    @State private var showDetails = false
     let armOptions = ["Right", "Left"]
     var body: some View {
         VStack {
             HStack {
                 Text(formatDateToString())
             }
-            .padding()
             VStack {
+                HStack {
+                    Button(action: {
+                        showDetails.toggle()
+                    }) {
+                        if editingRecord != true {
+                            if showDetails == false {
+                                Image(systemName: "info.circle.fill")
+                                    .foregroundColor(Color.blue)
+                            } else {
+                                Image(systemName: "arrowtriangle.up.square.fill")
+                                    .foregroundColor(Color.blue)
+                            }
+                        }
+                    }
+                }
             HStack {
                 VStack {
                     Text("Systolic")
@@ -78,6 +93,20 @@ struct RecordCardView: View {
                         .pickerStyle(SegmentedPickerStyle())
                     }
                 }
+                if showDetails && !editingRecord {
+                    Divider()
+                    VStack(alignment: .leading) {
+                        Text("Notes")
+                            .fontWeight(.black)
+                        Text(record.notes ?? "")
+                    }
+                    Divider()
+                    VStack(alignment: .leading) {
+                        Text("Arm Taken")
+                            .fontWeight(.black)
+                        Text(record.armTaken ?? "")
+                    }
+                }
             }
             .padding()
                 .overlay(
@@ -88,10 +117,28 @@ struct RecordCardView: View {
             .foregroundColor(.black)
             HStack {
                 if self.editingRecord {
-                    Button(action: {
-                        self.updateBP()
-                    }) {
-                        Text("Confirm")
+                    HStack {
+                        Button(action: {
+                            self.updateBP()
+                        }) {
+                            Text("Confirm")
+                        }
+                        .frame(width: 70, height: 40)
+                        .background(Color.white)
+                        .cornerRadius(20)
+                        .shadow(color: .black, radius: 5, x: -2, y: 5)
+                        .padding(.trailing, 10)
+                        Button(action: {
+                            editingRecord.toggle()
+                        }) {
+                            Text("Cancel")
+                                .frame(width: 70, height: 40)
+                                .background(Color.white)
+                                .cornerRadius(20)
+                                .shadow(color: .black, radius: 5, x: -2, y: 5)
+                                .padding(.trailing, 10)
+                                .foregroundColor(Color.red)
+                        }
                     }
                 } else {
                     HStack {
