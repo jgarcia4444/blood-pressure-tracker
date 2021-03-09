@@ -16,6 +16,7 @@ struct RecordCardView: View {
     @State private var editingRecord = false
     @State private var newNotes = ""
     @State private var newArmTaken = ""
+    let armOptions = ["Right", "Left"]
     var body: some View {
         VStack {
             HStack {
@@ -57,12 +58,24 @@ struct RecordCardView: View {
                 if editingRecord {
                     Divider()
                     VStack(alignment: .leading) {
-                        Text("Notes").fontWeight(.black)
+                        Text("Notes")
+                            .fontWeight(.black)
                         TextEditor(text: $newNotes)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.gray, lineWidth: 2.0)
                             )
+                    }
+                    Divider()
+                    VStack(alignment: .leading) {
+                        Text("Arm Taken")
+                            .fontWeight(.black)
+                        Picker("Arm Taken", selection: $newArmTaken) {
+                            ForEach(0..<self.armOptions.count) {
+                                Text(armOptions[$0]).tag(armOptions[$0])
+                            }
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
                     }
                 }
             }
