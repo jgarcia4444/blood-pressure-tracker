@@ -105,6 +105,7 @@ struct RecordsView: View {
         recordString += "Avg \(filter) Diastolic: \(avgDiastolic)\n"
         self.filterRecords().forEach { (record) in
             recordString += "\(formatDateToString(record: record)), Systolic: \(record.systolic) Diastolic: \(record.diastolic)\n"
+            recordString += "Notes: \(record.notes ?? "none") Arm Taken \(record.armTaken ?? "") \n"
         }
         return UISimpleTextPrintFormatter(text: recordString)
         
