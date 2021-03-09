@@ -55,9 +55,14 @@ struct RecordCardView: View {
                 
             }
                 if editingRecord {
-                    VStack {
-                        Text("Notes")
+                    Divider()
+                    VStack(alignment: .leading) {
+                        Text("Notes").fontWeight(.black)
                         TextEditor(text: $newNotes)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.gray, lineWidth: 2.0)
+                            )
                     }
                 }
             }
