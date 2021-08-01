@@ -21,7 +21,7 @@ struct AddRecordView: View {
     let disabledButtonBG = LinearGradient(gradient: Gradient(colors: [.black, .gray]), startPoint: .topLeading, endPoint: .bottomTrailing).opacity(0.5) as? LinearGradient
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.white, .gray]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(gradient: Gradient(colors: [.white, .gray, .black]), startPoint: .topLeading, endPoint: .bottomTrailing                )
             ScrollView {
                 VStack {
                     VStack {

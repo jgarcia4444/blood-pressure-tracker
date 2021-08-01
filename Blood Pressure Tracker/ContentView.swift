@@ -11,10 +11,11 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: Record.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Record.dateRecorded, ascending: false)])  var records: FetchedResults<Record>
+    
     var body: some View {
         NavigationView {
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [.white, .gray]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                LinearGradient(gradient: Gradient(colors: [.white, .gray, .black]), startPoint: .topLeading, endPoint: .bottomTrailing                )
                 VStack {
                     VStack {
                         HStack {
@@ -41,12 +42,12 @@ struct ContentView: View {
                                 .overlay(
                                     Circle()
                                         .stroke(lineWidth: 3)
-                                        .foregroundColor(.black)
+                                        .foregroundColor(.white)
                                 )
                                 .background(Color.white)
                                 .clipShape(Circle())
                                 .foregroundColor(.red)
-                                .shadow(color: .black, radius: 3, x: 0, y: 3)
+                                .shadow(color: .black, radius: 3, x: 0, y: 1)
                             }
                             .padding([.top, .bottom], 50)
                         }
@@ -60,10 +61,6 @@ struct ContentView: View {
                                     .foregroundColor(.red)
                             }
                             .padding()
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(lineWidth: 3)
-                                )
                             .background(Color.white)
                             .cornerRadius(10)
                             .shadow(color: .black, radius: 3, x: 0, y: 3)
@@ -75,13 +72,9 @@ struct ContentView: View {
                     
                 }
                 .padding(.top, 100)
-                .navigationBarTitle(Text("BP Numbers").foregroundColor(.black), displayMode: .large)
+                .navigationBarTitle(Text("BP Numbers"), displayMode: .large)
             }
             .edgesIgnoringSafeArea(.all)
-            .background(NavigationConfigurator { nc in
-                nc.navigationBar.barTintColor = .white
-                nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
-            })
         }
     .navigationViewStyle(StackNavigationViewStyle())
     }

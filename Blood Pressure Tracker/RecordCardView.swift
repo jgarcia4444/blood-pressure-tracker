@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct RecordCardView: View {
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var moc
     var record: Record
     @State private var newSystolic = ""
@@ -48,9 +49,10 @@ struct RecordCardView: View {
                         TextField("\(record.systolic)", text: $newSystolic )
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.numberPad)
+                            .foregroundColor(self.computedForegroundColor())
                     } else {
                         Text("\(String(record.systolic))")
-                        .fontWeight(.bold)
+                            .fontWeight(.bold)
                     }
                     
                 }
@@ -62,6 +64,7 @@ struct RecordCardView: View {
                         TextField("\(record.diastolic)", text: $newDiastolic)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.numberPad)
+                            .foregroundColor(self.computedForegroundColor())
                     } else {
                         Text("\(String(record.diastolic))")
                             .fontWeight(.bold)
@@ -76,6 +79,7 @@ struct RecordCardView: View {
                         Text("Notes")
                             .fontWeight(.black)
                         TextEditor(text: $newNotes)
+                            .foregroundColor(self.computedForegroundColor())
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.gray, lineWidth: 2.0)
@@ -109,11 +113,7 @@ struct RecordCardView: View {
                 }
             }
             .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(lineWidth: 3)
-                )
-            .background(Color.white.cornerRadius(5).shadow(color: .black, radius: 5, x: 0, y: 10))
+            .background(Color.white.cornerRadius(5).shadow(color: .black, radius: 5, x: 0, y: 3))
             .foregroundColor(.black)
             HStack {
                 if self.editingRecord {
@@ -126,7 +126,7 @@ struct RecordCardView: View {
                         .frame(width: 70, height: 40)
                         .background(Color.white)
                         .cornerRadius(20)
-                        .shadow(color: .black, radius: 5, x: -2, y: 5)
+                        .shadow(color: .black, radius: 3, x: 0, y: 1)
                         .padding(.trailing, 10)
                         Button(action: {
                             editingRecord.toggle()
@@ -135,7 +135,7 @@ struct RecordCardView: View {
                                 .frame(width: 70, height: 40)
                                 .background(Color.white)
                                 .cornerRadius(20)
-                                .shadow(color: .black, radius: 5, x: -2, y: 5)
+                                .shadow(color: .black, radius: 3, x: 0, y: 1)
                                 .padding(.trailing, 10)
                                 .foregroundColor(Color.red)
                         }
@@ -154,7 +154,7 @@ struct RecordCardView: View {
                         .frame(width: 70, height: 40)
                         .background(Color.white)
                         .cornerRadius(20)
-                        .shadow(color: .black, radius: 5, x: -2, y: 5)
+                        .shadow(color: .black, radius: 3, x: 0, y: 1)
                         .padding(.trailing, 10)
                         Button(action: {
                             self.deleteBP()
@@ -165,7 +165,7 @@ struct RecordCardView: View {
                         .frame(width: 70, height: 40)
                         .background(Color.white)
                         .cornerRadius(20)
-                        .shadow(color: .black, radius: 5, x: -2, y: 5)
+                        .shadow(color: .black, radius: 3, x: 0, y: 1)
                         .padding(.leading, 10)
                     }
                     .padding(.top, 10)
@@ -173,6 +173,10 @@ struct RecordCardView: View {
             }
         }
         .padding()
+    }
+    
+    func computedForegroundColor () -> Color {
+        colorScheme == .dark ? Color.white : Color.black
     }
     
     func deleteBP() {

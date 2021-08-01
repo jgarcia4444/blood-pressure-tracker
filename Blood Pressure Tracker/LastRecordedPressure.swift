@@ -23,7 +23,6 @@ struct LastRecordedPressure: View {
                     Spacer()
                 }
                 .padding([.top, .bottom], 10)
-//                .background(Color.black)
                 HStack {
                     VStack {
                         Text("BP")
@@ -40,11 +39,7 @@ struct LastRecordedPressure: View {
                     }
                 }
                 .padding()
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 15)
-                            .stroke(lineWidth: 3)
-                    )
-                .background(Color.white.cornerRadius(5).clipShape(RoundedRectangle(cornerRadius: 15)).shadow(color: .black, radius: 5, x: 0, y: 10))
+                .background(Color.white.cornerRadius(5).clipShape(RoundedRectangle(cornerRadius: 15)).shadow(color: .black, radius: 3, x: 0, y: 5))
                 .foregroundColor(.black)
                 
             }
